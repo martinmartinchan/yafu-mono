@@ -3,8 +3,17 @@ module.exports = {
     mocha: true,
     node: true,
   },
-  extends: 'airbnb-base',
-  plugins: [ 'import' ],
+  parser: '@typescript-eslint/parser',
+  plugins: [
+    '@typescript-eslint',
+    'import',
+  ],
+  extends: [
+    'airbnb-base',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
   rules: {
     'array-bracket-spacing': [ 'warn', 'always' ],
     'arrow-body-style': 'warn',
@@ -31,7 +40,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     'no-plusplus': 'off',
     'no-unexpected-multiline': 'error',
-    'no-unused-vars': [ 'warn', {
+    '@typescript-eslint/no-unused-vars': [ 'warn', {
       args: 'all',
       argsIgnorePattern: '^_',
       ignoreRestSiblings: false,
