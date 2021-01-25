@@ -14,6 +14,14 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
   ],
+  overrides: [
+    {
+      files: [ '*.js', '*.jsx' ],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+      },
+    },
+  ],
   rules: {
     'array-bracket-spacing': [ 'warn', 'always' ],
     'arrow-body-style': 'warn',
