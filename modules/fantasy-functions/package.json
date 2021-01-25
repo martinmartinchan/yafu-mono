@@ -15,7 +15,8 @@
     "lint": "eslint lib test *.js",
     "prepublishOnly": "yarn clean && yarn transpile",
     "test": "yarn lint && yarn unit",
-    "transpile": "node scripts/generate-module.js && rollup -c",
+    "tsgen": "node scripts/tsgen > dist/types.d.ts",
+    "transpile": "node scripts/generate-module.js && rollup -c && yarn tsgen",
     "unit": "mocha"
   },
   "dependencies": {
