@@ -248,7 +248,7 @@ describe('errors', () => {
 
   it('throws if a type representative is missing a function', () => {
     throws(() => traverse(Add, inc, i2), buildMessage([
-      `traverse expects a type representative with function ${FL.of}`,
+      'traverse expects a type representative of an Applicable',
       'but got Add',
     ]))
   })

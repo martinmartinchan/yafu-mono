@@ -1,8 +1,46 @@
 import * as FL from 'fantasy-land'
 import { I, composeN } from 'yafu'
 import isSameType from './is-same-type'
+import definitions from './definitions'
+
+function clearGeneric (string) {
+  return string.replace(/<\w+>/, '')
+}
+
+function findMethod (typeName) {
+  const pairs = Object.entries(definitions)
+  const match = pairs.find(([ , value ]) => value.name === typeName)
+  return `fantasy-land/${match[0]}`
+}
+
+function isGeneric (paramName) {
+  return /^[A-Z]$/.test(paramName)
+}
+
+function isFunction (spec) {
+  return spec.indexOf('=>') !== -1
+}
+
+function isSameTypeSpec (spec) {
+  return spec.indexOf('_sameType') === 0
+}
 
 function getSpecParts (spec) {
+  if (isSameTypeSpec(spec)) {
+    const base = {
+      main: '_sameType',
+    }
+    if (isFunction(spec)) {
+      Object.assign(base, { secondary: 'function' })
+    }
+    return base
+  }
+  if (isFunction(spec)) {
+    return {
+      main: 'function',
+      secondary: spec.split(' => ')[1],
+    }
+  }
   const specParts = spec.split(':')
   return {
     main: specParts[0],
@@ -15,24 +53,24 @@ function getExpectedString (algebra, spec) {
   const type = algebra.constructor.name
   const messageParts = [
     'expects',
-    main === '_sameType'
+    isSameTypeSpec(main)
       ? `an instance of ${type}`
       : main === '_constructor'
         ? 'a type representative'
         : `a ${main}`,
   ]
 
-  if (secondary != null) {
-    const secondaryAction = main === '_sameType'
+  if (secondary != null && !isGeneric(secondary)) {
+    const secondaryAction = isSameTypeSpec(main)
       ? 'containing'
       : main === '_constructor'
-        ? 'with function'
+        ? 'of an'
         : 'returning'
 
-    const secondaryType = secondary === '_sameType'
+    const secondaryType = isSameTypeSpec(secondary)
       ? `an instance of ${type}`
       : main === '_constructor'
-        ? secondary
+        ? clearGeneric(secondary)
         : `a ${secondary}`
 
     messageParts.push(secondaryAction, secondaryType)
@@ -64,15 +102,15 @@ function createValueString (isMain, algebra, specParts, value) {
 }
 
 function throwIfInvalid (name, algebra, spec, specPart, value) {
-  if (specPart === '_any') return
+  if (specPart === '_any' || isGeneric(specPart)) return
 
   const specParts = getSpecParts(spec)
   const { main, secondary } = specParts
 
   // eslint-disable-next-line valid-typeof
   const isCorrectType = (!isCustomSpec(specPart) && typeof value === specPart)
-    || (specPart === '_sameType' && (isSameType(value, algebra)))
-    || (specPart === '_constructor' && value[secondary] != null)
+    || (isSameTypeSpec(specPart) && (isSameType(value, algebra)))
+    || (specPart === '_constructor' && value[findMethod(clearGeneric(secondary))] != null)
 
   if (!isCorrectType) {
     const isMain = specPart === main
@@ -107,8 +145,8 @@ export default function createDebugFunction (name, definition) {
     const methodArgs = isStatic ? fnArgs.slice(1) : fnArgs.slice(0, args.length)
 
     function wrapFn (fn, spec) {
-      return (v) => {
-        const result = fn(v)
+      return (...innerArgs) => {
+        const result = fn(...innerArgs)
         const { secondary } = getSpecParts(spec)
         throwIfInvalid(name, algebra, spec, secondary, result)
         return result

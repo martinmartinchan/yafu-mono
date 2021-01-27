@@ -54,9 +54,11 @@ const allDefs = Object.entries(definitions).map(([ fn, spec ]) => {
   const methodGenerics = methodGenericsList.length ? `<${methodGenericsList.join(', ')}>` : ''
   const extendWithGenerics = extending.map((item) => `${item}${extendingGenerics}`)
 
-  const method = `${fn}: ${methodGenerics}(${args.map(formatArgument).join(', ')})`
+  const method = `[FL.${fn}]: ${methodGenerics}(${args.map(formatArgument).join(', ')})`
   const extendStatement = extending.length ? ` extends ${extendWithGenerics.join(', ')}` : ''
   return `export interface ${name}${generics}${extendStatement} {
   ${method} => ${returnType}\n}\n`
 })
+
+process.stdout.write("import * as FL from 'fantasy-land'\n\n")
 process.stdout.write(allDefs.join('\n'))
