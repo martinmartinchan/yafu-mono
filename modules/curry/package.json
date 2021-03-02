@@ -11,6 +11,7 @@
     "lint": "eslint lib/*.js test/*.js",
     "test": "yarn lint && yarn unit",
     "transpile": "rollup -c",
+    "prepublishOnly": "yarn clean && yarn transpile",
     "unit": "mocha"
   },
   "devDependencies": {
