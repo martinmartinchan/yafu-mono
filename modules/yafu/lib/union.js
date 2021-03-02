@@ -1,6 +1,9 @@
-import _concat from './_concat'
 import composeBinary from './compose-binary'
 import uniq from './uniq'
+
+function concat (a, b) {
+  return a.concat(b)
+}
 
 /**
  * Returns a list of unique values composed of elements from each input list using
@@ -12,6 +15,6 @@ import uniq from './uniq'
  * @return {Array} A new list of unique elements
  *
  */
-const union = composeBinary(uniq, _concat)
+const union = composeBinary(uniq, concat)
 
 export default union

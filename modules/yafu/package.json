@@ -29,6 +29,9 @@
     "test": "yarn unit && yarn bundle && yarn acceptance && rm lib/index.js",
     "unit": "mocha testrunners/unit"
   },
+  "dependencies": {
+    "@yafu/curry": "^0.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.12.11",

@@ -1,5 +1,5 @@
-import _apply from './_apply'
 import curry from './curry'
+
 export default curry(_composeN)
 
 /**
@@ -13,7 +13,7 @@ export default curry(_composeN)
  */
 function _composeN (n, f, g) {
   function composed (...args) {
-    return f(_apply(g, args))
+    return f(g(...args))
   }
   Object.defineProperty(composed, 'length', { value: n })
   return composed
