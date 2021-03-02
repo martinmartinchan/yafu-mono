@@ -15,8 +15,8 @@
     "watch": "lerna run --parallel transpile -- -w"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
     "@yafu/eslint-config-yafu": "^1.0.2",
     "array-equal": "^1.0.0",
     "lerna": "^3.21.1",
