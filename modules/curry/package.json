@@ -1,0 +1,23 @@
+{
+  "name": "@yafu/curry",
+  "version": "0.0.0",
+  "description": "Yafu's curry implementation",
+  "license": "MIT",
+  "author": "Ludwig Magnusson <ludwig.magnusson@gmail.com>",
+  "main": "dist/curry.js",
+  "module": "lib/curry.js",
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "lint": "eslint lib/*.js test/*.js",
+    "test": "yarn lint && yarn unit",
+    "transpile": "rollup -c",
+    "unit": "mocha"
+  },
+  "devDependencies": {
+    "chai": "^4.3.0",
+    "eslint": "^7.17.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
