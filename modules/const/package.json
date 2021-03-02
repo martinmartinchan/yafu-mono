@@ -1,6 +1,6 @@
 {
   "name": "@yafu/const",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Const monad",
   "license": "MIT",
   "author": "Ludwig Magnusson <ludwig.magnusson@gmail.com>",

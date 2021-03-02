@@ -1,6 +1,6 @@
 {
   "name": "@yafu/fantasy-functions",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "author": "Ludwig Magnusson <ludwig.magnusson@gmail.com>",
   "module": "./dist/es6/fantasy-functions.js",
@@ -20,14 +20,14 @@
   },
   "dependencies": {
     "fantasy-land": "^4.1.0",
-    "yafu": "^1.1.0"
+    "yafu": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
     "@babel/register": "^7.13.8",
     "@rollup/plugin-node-resolve": "^11.2.0",
-    "@yafu/eslint-config-yafu": "^1.0.3",
+    "@yafu/eslint-config-yafu": "^1.0.4",
     "babel-plugin-add-module-exports": "^1.0.4",
     "chai": "^4.3.0",
     "eslint": "^7.21.0",

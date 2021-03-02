@@ -1,6 +1,6 @@
 {
   "name": "@yafu/identity",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Identity monad",
   "license": "MIT",
   "author": "Ludwig Magnusson <ludwig.magnusson@gmail.com>",
