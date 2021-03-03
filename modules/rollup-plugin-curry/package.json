@@ -7,16 +7,22 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "lint": "eslint lib/ samplecode/",
-    "test": "yarn lint",
+    "test": "yarn lint && yarn unit",
+    "unit": "mocha",
     "transpile": "rollup -c",
     "prepublishOnly": "yarn clean && yarn transpile"
   },
   "devDependencies": {
+    "chai": "^4.3.3",
     "eslint": "^7.21.0",
+    "mocha": "^8.3.0",
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.2.2"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "ramda": "^0.27.1"
   }
 }
