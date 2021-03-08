@@ -1,9 +1,7 @@
 import parse from './parse'
-import printers from './printers'
+import curryPrint from './curry-print'
 
 export default function cd (functionDeclaration) {
   const definition = parse(functionDeclaration)
-  const { parameters } = definition
-  const print = printers[parameters.length - 1]
-  return print(definition)
+  return curryPrint(definition)
 }
